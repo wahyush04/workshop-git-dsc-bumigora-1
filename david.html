@@ -1,0 +1,77 @@
+
+package com.linov.community.contributors
+
+import com.github.mustachejava.Mustache
+import com.linov.community.Contributor
+import com.linov.community.Educations
+import com.linov.community.Jobs
+import com.linov.community.Skills
+import io.ktor.application.ApplicationCall
+import io.ktor.mustache.MustacheContent
+import io.ktor.response.respond
+
+class DavidGeri : Contributor {
+    override val idGithub: String
+        get() = "@davidgeri"
+    override val name: String
+        get() = "David Geri"
+    override val photoUrl: String?
+        get() = "https://avatars0.githubusercontent.com/u/56905427?s=400&u=a950675ae81c66d8bf33872a145a44c9f10a7006&v=4"
+    override val currentJob: String?
+        get() = "Mahasiswa"
+    override val email: String?
+        get() = "davidgeri988@gmail.com"
+    override val descriptions: String?
+        get() = "Calon Programmer + Gamer jago parah"
+    override val linkedin: String?
+        get() = ""
+    override val stackOverflow: String?
+        get() = "davidgeri"
+    override val idTelegram: String?
+        get() = "@davidgeri"
+    override val skillset: List<Skills>?
+        get() = listOf(
+            Skills("Kotlin"),
+            Skills("Java"),
+            Skills("Android Development")
+        )
+    override val location: String?
+        get() = "Mataram"
+    override val jobHistory: List<Jobs>?
+        get() = listOf(
+            Jobs(
+                "DSC Universitass Bumigora",
+                "Google Developers",
+                "Pencari tau hal baru",
+                "2019",
+                "present"
+            ),
+            Jobs(
+                "CEO Peace Food",
+                "PEACE",
+                "CEO",
+                "2019",
+                "present"
+            )
+        )
+    override val educations: List<Educations>?
+        get() = listOf(
+            Educations(
+                "Universitas Bumigora",
+                "Semester 3",
+                "2018 - present",
+                "Ilmu Komputer"
+            )
+        )
+
+    override suspend fun response(call: ApplicationCall) {
+        call.respond(MustacheContent("cv.hbs", mapOf("user" to this)))
+    }
+
+    companion object {
+        fun initialize(map: MutableMap<String, Contributor>){
+            map["David"] = DavidGeri()
+        }
+    }
+}
+
